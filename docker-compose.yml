@@ -1,0 +1,18 @@
+services:
+  webhook:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    image: sweepai/sweep
+    container_name: webhook
+    # network_mode: "host"
+    volumes:
+      - .:/app
+    command: >
+      sh -c ". bin/startup.sh"
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
